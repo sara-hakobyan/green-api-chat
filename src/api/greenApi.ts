@@ -10,6 +10,16 @@ export function chatIdsIn(text: string) {
   return [...new Set(text.match(/\d+@c\.us/g) ?? [])];
 }
 
+// Thrown when GREEN-API answers with an error status; status lets callers tell
+// e.g. a wrong token (401) from other errors
+export class ApiError extends Error {
+  status: number;
+  constructor(method: string, status: number) {
+    super(`${method} failed: ${status}`);
+    this.status = status;
+  }
+}
+
 // Thrown when GREEN-API answers 466: the Developer plan limit is reached.
 // allowedChatIds = the only chats that still work this month (read from the error body)
 export class QuotaExceededError extends Error {
@@ -35,7 +45,7 @@ export async function sendMessage(
   if (res.status === 466) {
     throw new QuotaExceededError(chatIdsIn(await res.text()));
   }
-  if (!res.ok) throw new Error(`sendMessage failed: ${res.status}`);
+  if (!res.ok) throw new ApiError("sendMessage", res.status);
   const data: { idMessage: string } = await res.json();
   return data.idMessage;
 }
@@ -45,7 +55,7 @@ export async function receiveNotification(c: Credentials) {
   const res = await fetch(
     buildUrl(c, "receiveNotification") + "?receiveTimeout=5"
   );
-  if (!res.ok) throw new Error(`receiveNotification failed: ${res.status}`);
+  if (!res.ok) throw new ApiError("receiveNotification", res.status);
   const text = await res.text();
   return text ? (JSON.parse(text) as GreenApiNotification | null) : null;
 }
@@ -55,13 +65,13 @@ export async function deleteNotification(c: Credentials, receiptId: number) {
   const res = await fetch(`${buildUrl(c, "deleteNotification")}/${receiptId}`, {
     method: "DELETE",
   });
-  if (!res.ok) throw new Error(`deleteNotification failed: ${res.status}`);
+  if (!res.ok) throw new ApiError("deleteNotification", res.status);
 }
 
 // Check the instance: returns e.g. 'authorized' or 'notAuthorized'.
 export async function getStateInstance(c: Credentials) {
   const res = await fetch(buildUrl(c, "getStateInstance"));
-  if (!res.ok) throw new Error(`getStateInstance failed: ${res.status}`);
+  if (!res.ok) throw new ApiError("getStateInstance", res.status);
   const data: { stateInstance: string } = await res.json();
   return data.stateInstance;
 }

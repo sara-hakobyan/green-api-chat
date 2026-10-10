@@ -56,7 +56,10 @@ export const useChatStore = create<ChatState>()(
       addMessage: (chatId, message) =>
         set((state) => ({
           chats: state.chats.map((c) => {
-            if (c.chatId !== chatId || c.messages.some((m) => m.id === message.id)) {
+            if (
+              c.chatId !== chatId ||
+              c.messages.some((m) => m.id === message.id)
+            ) {
               return c;
             }
             const isUnread =
@@ -135,7 +138,8 @@ export const useChatStore = create<ChatState>()(
         }
       },
 
-      clearChats: () => set({ chats: [], activeChatId: null, allowedChatIds: [] }),
+      clearChats: () =>
+        set({ chats: [], activeChatId: null, allowedChatIds: [] }),
     }),
     {
       name: "green-api-chats",
@@ -143,3 +147,12 @@ export const useChatStore = create<ChatState>()(
     }
   )
 );
+
+// On logout, drop the chats so the next account doesn't see them. Done here by listening
+// to the auth store, so every logout clears the chats, not only the button in App.
+
+useAuthStore.subscribe((state, prev) => {
+  if (prev.credentials && !state.credentials) {
+    useChatStore.getState().clearChats();
+  }
+});

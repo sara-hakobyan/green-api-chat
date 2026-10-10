@@ -39,6 +39,10 @@
   background: #d9fdd3;
 }
 
+.pending {
+  opacity: 0.6;
+}
+
 .time {
   float: right;
   margin: 6px 0 -4px 10px;
