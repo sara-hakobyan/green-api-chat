@@ -1,0 +1,93 @@
+.empty {
+  margin: auto;
+  color: #667781;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 16px;
+  background: #f0f2f5;
+  font-weight: 600;
+}
+
+.messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 16px 60px;
+  list-style: none;
+  overflow-y: auto;
+}
+
+.bubble {
+  align-self: flex-start;
+  max-width: 65%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.outgoing {
+  align-self: flex-end;
+  background: #d9fdd3;
+}
+
+.time {
+  float: right;
+  margin: 6px 0 -4px 10px;
+  font-size: 11px;
+  color: #667781;
+}
+
+.error {
+  margin: 0;
+  padding: 4px 16px;
+  color: #ea0038;
+}
+
+.form {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #f0f2f5;
+}
+
+.input {
+  flex: 1;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+.send {
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  background: #00a884;
+  color: #fff;
+  cursor: pointer;
+}
+
+.send:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.notice {
+  align-self: center;
+  margin: 0 16px 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #ffeecd;
+  color: #54656f;
+  font-size: 13px;
+  text-align: center;
+}

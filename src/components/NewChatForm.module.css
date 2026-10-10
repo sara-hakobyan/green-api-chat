@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e9edef;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #f0f2f5;
+  outline: none;
+}
+
+.button {
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: #00a884;
+  color: #fff;
+  cursor: pointer;
+}
+
+.error {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 13px;
+  color: #ea0038;
+}
