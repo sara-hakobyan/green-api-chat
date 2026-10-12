@@ -2,6 +2,8 @@
 
 A minimal WhatsApp Web–style chat for sending and receiving text messages through [GREEN-API](https://green-api.com/en/docs/).
 
+**Live demo:** [green-api-chat-nu.vercel.app](https://green-api-chat-nu.vercel.app/). Log in with your own GREEN-API instance (see [How to test](#how-to-test)).
+
 Test assignment for the React Frontend Developer position. The task asks for MAX, with WhatsApp or Telegram allowed as a fallback. MAX was not available in my GREEN-API console, so the app works with a **WhatsApp** instance.
 
 ## What was implemented
@@ -100,7 +102,7 @@ Other scripts: `npm run build` (type check + production build), `npm run preview
 
 Use one browser tab (see [Known limitations](#known-limitations)).
 
-1. Log in with those three values.
+1. Open the [live demo](https://green-api-chat-nu.vercel.app/) (or run it locally) and log in with those three values.
 2. Click **New chat** and enter a phone number with country code (e.g. `79001234567`). Use a number **different** from the one linked to the instance.
 3. Send a message. It appears in the chat right away; check that it arrives on that phone.
 4. Reply from that phone. The reply appears in the chat within a few seconds.
